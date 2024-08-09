@@ -1,0 +1,18 @@
+import asyncio
+from loguru import logger
+
+from loader import dp, bot
+
+ALLOWED_UPDATES = ['message, edited message']
+
+
+async def main():
+    await bot.delete_webhook(drop_pending_updates=True)
+    logger.info('Bot run')
+    await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
+    logger.info('Bot stopped')
+
+
+if __name__ == '__main__':
+    logger.info('Application running')
+    asyncio.run(main())
