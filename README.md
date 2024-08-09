@@ -19,8 +19,6 @@ BOT_DESCRIPTION = ''
 
 ADMIN_IDS = '["first admin id", "second admin id"]' 
 SKIP_UPDATES = False
-
-DROPBOX_TOKEN = 'get token from dropbox console'
 ```
 
 
