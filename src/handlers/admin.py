@@ -2,7 +2,7 @@ from loguru import logger
 from config import settings
 from aiogram import Router, Bot
 
-admin_notify_router = Router(name='Admin Notification')
+admin_notify_router = Router(name='Admin notification')
 
 
 @admin_notify_router.startup()

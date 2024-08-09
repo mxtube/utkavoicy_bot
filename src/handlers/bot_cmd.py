@@ -4,7 +4,7 @@ from aiogram import Router, types
 from aiogram.filters import CommandStart
 
 
-command_router = Router(name='bot_commands')
+command_router = Router(name='Bot commands')
 
 
 @command_router.message(CommandStart())
