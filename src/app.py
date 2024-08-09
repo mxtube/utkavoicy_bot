@@ -3,11 +3,13 @@ from loguru import logger
 
 from loader import dp, bot
 from utils import setting_bot_menu
+from database import initialize_database
 
 ALLOWED_UPDATES = ['message, edited message']
 
 
 async def main():
+    await initialize_database()
     await bot.delete_webhook(drop_pending_updates=True)
     await setting_bot_menu()
     logger.info('Bot run')
