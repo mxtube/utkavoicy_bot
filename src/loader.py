@@ -3,7 +3,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
 
 from config import settings
-from handlers import command_router
+import handlers
 
 bot = Bot(token=settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
 
@@ -13,5 +13,6 @@ dp = Dispatcher(bot=bot, storage=storage)
 
 # Register routers
 dp.include_routers(
-    command_router,
+    handlers.command_router,
+    handlers.admin_notify_router
 )
