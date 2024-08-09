@@ -1,6 +1,7 @@
 ## Install
+Создайте виртуальное окружение в директории ```src``` и установите библиотеки из файла ```requirements.txt```
 
-В корне проекта создайте файл .env с прописанными кредами:
+В корне проекта создайте файл ```.env```
 
 ```
 DEBUG = False
@@ -21,3 +22,7 @@ SKIP_UPDATES = False
 
 DROPBOX_TOKEN = 'get token from dropbox console'
 ```
+
+
+## Run
+Для запуска воспользуйтесь командой ```python app.py```
