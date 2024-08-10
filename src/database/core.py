@@ -4,9 +4,11 @@ from typing import ContextManager
 from contextlib import asynccontextmanager
 
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
-from sqlalchemy.orm import declarative_base
 
 from config import settings
+from models import Base
+import models
+
 
 sa_async_engine = create_async_engine(
     url=settings.DATABASE_URL_asyncpg,
@@ -18,8 +20,6 @@ sa_session_factory = async_sessionmaker(
     expire_on_commit=False,
     class_=AsyncSession
 )
-
-Base = declarative_base()
 
 
 async def initialize_database():
