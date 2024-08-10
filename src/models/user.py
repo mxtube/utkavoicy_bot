@@ -1,5 +1,9 @@
+from loguru import logger
+
 from sqlalchemy import BigInteger
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 
 from .sa import intpk, created_at, updated_at, deleted_at, Base
 
@@ -20,3 +24,25 @@ class User(Base):
 
     repr_cols_num = 6
     repr_cols = ('created_at', )
+
+    @staticmethod
+    async def create_or_update(session: AsyncSession, user_data: dict):
+        result = await session.execute(select(User).filter_by(tg_id=user_data['id']))
+        user = result.scalars().first()
+
+        if user:
+            user.username = user_data['username']
+            user.first_name = user_data['first_name']
+            user.last_name = user_data['last_name']
+            await session.commit()
+            logger.info(f'User {user.username} was updated in the database')
+        else:
+            new_user = User(
+                username=user_data['username'],
+                tg_id=user_data['id'],
+                first_name=user_data['first_name'],
+                last_name=user_data['last_name']
+            )
+            session.add(new_user)
+            await session.commit()
+            logger.info(f'User {new_user.username} add in the database')
