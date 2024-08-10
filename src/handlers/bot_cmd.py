@@ -34,7 +34,7 @@ async def start(message: types.Message, session: AsyncSession):
         )
         session.add(new_user)
         await session.commit()
-        logger.info(f'User {user.username} add in the database')
+        logger.info(f'User {new_user.username} add in the database')
 
     await message.answer(answer_message)
     logger.info(f'Bot send to user message: {answer_message}')
