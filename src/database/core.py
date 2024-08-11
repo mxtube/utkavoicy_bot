@@ -12,7 +12,9 @@ import models
 
 sa_async_engine = create_async_engine(
     url=settings.DATABASE_URL_asyncpg,
-    echo=settings.DEBUG
+    echo=settings.DEBUG,
+    pool_recycle=1000,
+    pool_pre_ping=True
 )
 
 sa_session_factory = async_sessionmaker(
