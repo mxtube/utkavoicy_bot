@@ -23,6 +23,14 @@ SKIP_UPDATES = False
 DROPBOX_TOKEN = ''
 ```
 
+## @BotFather settings
+В ```@BotFather``` настройте placeholder для ```Inline Mode```:
+
+```Edit Bot``` > ```Edit inline placeholder``` 
+
+и включите ```Inline Mode```:
+
+```Bot Settings``` > ```Inline Mode``` > ```Turn inline mode on```
 
 ## Run
 Для запуска воспользуйтесь командой ```python app.py```
