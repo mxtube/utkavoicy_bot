@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     ADMIN_IDS: list
     SKIP_UPDATES: bool = False
 
+    OPENDRIVE_USER: str
+    OPENDRIVE_PASSWORD: str
+
     model_config = SettingsConfigDict(env_file='../.env', extra='ignore')
 
 
