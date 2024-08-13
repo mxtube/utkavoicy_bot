@@ -29,7 +29,8 @@ class OpenDriveApi:
 
     async def get_files_from_directories(self):
 
-        get_folders_url = 'https://dev.opendrive.com/api/v1/folder/shared.json/MzNfMzYyNTIzMl80OGRGbA'
+        directory = settings.OPENDRIVE_PROJECT_DIRECTORY
+        get_folders_url = f'https://dev.opendrive.com/api/v1/folder/shared.json/{directory}'
         headers = {'session_id': self.session_id}
 
         folders_response = requests.get(get_folders_url, headers=headers)
@@ -45,12 +46,14 @@ async def initialize_voice():
     dp = OpenDriveApi()
     await dp.auth()
     voices = await dp.get_files_from_directories()
-
-    async with get_async_sa_session() as session:
-        for file in voices.get('Files', []):
-            name = file['Name'].split('.')[0]
-            download_link = file['StreamingLink']
-            voice = Voicy(name=name, url=download_link)
-            session.add(voice)
-            await session.commit()
-            logger.info(f'Adding voice {name} link to database')
+    try:
+        async with get_async_sa_session() as session:
+            for file in voices.get('Files', []):
+                name = file['Name'].split('.')[0]
+                download_link = file['StreamingLink']
+                voice = Voicy(name=name, url=download_link)
+                session.add(voice)
+                await session.commit()
+                logger.info(f'Adding voice {name} link to database')
+    except Exception as e:
+        logger.error(e)

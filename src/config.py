@@ -25,6 +25,7 @@ class Settings(BaseSettings):
 
     OPENDRIVE_USER: str
     OPENDRIVE_PASSWORD: str
+    OPENDRIVE_PROJECT_DIRECTORY: str
 
     model_config = SettingsConfigDict(env_file='../.env', extra='ignore')
 

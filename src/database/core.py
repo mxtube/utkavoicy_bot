@@ -26,18 +26,21 @@ sa_session_factory = async_sessionmaker(
 
 async def initialize_database():
     logger.info('Database initialization started')
-    async with sa_async_engine.begin() as conn:
+    try:
+        async with sa_async_engine.begin() as conn:
 
-        await conn.run_sync(Base.metadata.drop_all)
-        logger.info('All tables dropped')
+            await conn.run_sync(Base.metadata.drop_all)
+            logger.info('All tables dropped')
 
-        await conn.run_sync(Base.metadata.create_all)
-        logger.info(f'Tables created: {len(Base.metadata.tables)}')
+            await conn.run_sync(Base.metadata.create_all)
+            logger.info(f'Tables created: {len(Base.metadata.tables)}')
 
-        for table_name in Base.metadata.tables:
-            logger.info(f'Table {table_name} created')
+            for table_name in Base.metadata.tables:
+                logger.info(f'Table {table_name} created')
 
-        logger.info('Database initialization completed')
+            logger.info('Database initialization completed')
+    except Exception as e:
+        logger.error(e)
 
 
 @asynccontextmanager
