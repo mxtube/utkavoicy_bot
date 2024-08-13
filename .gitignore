@@ -1,6 +1,12 @@
+# Env
 .env
 .venv/
 
-
 # PyCharm
 .idea/**
+
+# Python
+__pycache__/
+
+# Other
+.DS_Store
