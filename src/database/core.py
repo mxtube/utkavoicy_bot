@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
 from config import settings
-from models import Base
+from models import Base, Voicy
 import models
 
 
@@ -39,6 +39,19 @@ async def initialize_database():
                 logger.info(f'Table {table_name} created')
 
             logger.info('Database initialization completed')
+    except Exception as e:
+        logger.error(e)
+
+
+async def initialize_voices(files: list):
+    logger.info('Voices initialization started')
+    try:
+        async with sa_session_factory() as session:
+            for voice in files:
+                voice = Voicy(name=voice.get('name'), url=voice.get('url'))
+                session.add(voice)
+                await session.commit()
+                logger.info(f'Voice {voice} added to db')
     except Exception as e:
         logger.error(e)
 

@@ -23,6 +23,14 @@ class Settings(BaseSettings):
     ADMIN_IDS: list
     SKIP_UPDATES: bool = False
 
+    SUPABASE_API_KEY: str
+    SUPABASE_URL: str
+    SUPABASE_BUCKET: str
+    SUPABASE_KEY: str
+    SUPABASE_KEY_ACCESS: str
+    SUPABASE_REGION: str
+    SUPABASE_PROJECT_ID: str
+
     model_config = SettingsConfigDict(env_file='../.env', extra='ignore')
 
 

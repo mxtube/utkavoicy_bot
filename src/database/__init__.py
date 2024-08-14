@@ -1,1 +1,1 @@
-from .core import initialize_database
+from .core import initialize_database, initialize_voices
