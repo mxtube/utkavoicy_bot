@@ -29,11 +29,11 @@ async def initialize_database():
     try:
         async with sa_async_engine.begin() as conn:
 
-            await conn.run_sync(Base.metadata.drop_all)
-            logger.info('All tables dropped')
-            if not settings.DEBUG:
-                await conn.run_sync(Base.metadata.create_all)
-                logger.info(f'Tables created: {len(Base.metadata.tables)}')
+            # await conn.run_sync(Base.metadata.drop_all)
+            # logger.info('All tables dropped')
+
+            await conn.run_sync(Base.metadata.create_all)
+            logger.info(f'Tables created: {len(Base.metadata.tables)}')
 
             for table_name in Base.metadata.tables:
                 logger.info(f'Table {table_name} created')
@@ -48,9 +48,7 @@ async def initialize_voices(files: list):
     try:
         async with sa_session_factory() as session:
             for voice in files:
-                voice = Voicy(name=voice.get('name'), url=voice.get('url'))
-                session.add(voice)
-                await session.commit()
+                await Voicy.create_or_update(session, voice)
                 logger.info(f'Voice {voice} added to db')
     except Exception as e:
         logger.error(e)

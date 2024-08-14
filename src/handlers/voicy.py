@@ -15,7 +15,7 @@ async def voicy_message(inline_query: types.InlineQuery, session: AsyncSession):
     logger.info(f"Inline query voice from user {inline_query.from_user.username}")
     user = await User.is_user_exists(session, inline_query.from_user.id)
     if user:
-        query = await session.execute(select(Voicy))
+        query = await session.execute(select(Voicy).where(Voicy.deleted_at.is_(None)))
         voices = query.scalars().all()
         menu = []
         for index, voice in enumerate(voices, start=1):
