@@ -15,6 +15,7 @@ dp = Dispatcher(bot=bot, storage=storage)
 # Register middlewares
 dp.message.middleware(SessionMiddleware())
 dp.inline_query.middleware(SessionMiddleware())
+dp.chosen_inline_result.middleware(SessionMiddleware())
 
 # Register routers
 dp.include_routers(

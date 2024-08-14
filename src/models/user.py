@@ -46,3 +46,10 @@ class User(Base):
             session.add(new_user)
             await session.commit()
             logger.info(f'User {new_user.username} add in the database')
+
+    @classmethod
+    async def is_user_exists(cls, session: AsyncSession, tg_id: int) -> bool:
+        logger.info(f'Check user id {tg_id} in database')
+        result = await session.execute(select(cls).where(cls.tg_id == tg_id))
+        user = result.fetchone()
+        return bool(user)

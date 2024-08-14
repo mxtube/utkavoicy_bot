@@ -12,7 +12,7 @@ import models
 
 sa_async_engine = create_async_engine(
     url=settings.DATABASE_URL_asyncpg,
-    echo=settings.DEBUG,
+    echo=True,
     pool_recycle=1000,
     pool_pre_ping=True
 )
@@ -31,9 +31,9 @@ async def initialize_database():
 
             await conn.run_sync(Base.metadata.drop_all)
             logger.info('All tables dropped')
-
-            await conn.run_sync(Base.metadata.create_all)
-            logger.info(f'Tables created: {len(Base.metadata.tables)}')
+            if not settings.DEBUG:
+                await conn.run_sync(Base.metadata.create_all)
+                logger.info(f'Tables created: {len(Base.metadata.tables)}')
 
             for table_name in Base.metadata.tables:
                 logger.info(f'Table {table_name} created')
