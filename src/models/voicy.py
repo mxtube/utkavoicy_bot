@@ -14,10 +14,14 @@ class Voicy(Base):
     id: Mapped[intpk]
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     url: Mapped[str] = mapped_column(unique=True, nullable=False)
+    ext_id: Mapped[str] = mapped_column(unique=False, nullable=True)
     created_at: Mapped[created_at]
     deleted_at: Mapped[deleted_at]
 
     repr_cols_num = 4
+
+    def get_name(self) -> str:
+        return f'{self.name}' if self.ext_id is None else f'{self.ext_id}'
 
     @staticmethod
     async def create_or_update(session: AsyncSession, voice_data: dict):

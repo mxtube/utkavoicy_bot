@@ -22,7 +22,7 @@ async def voicy_message(inline_query: types.InlineQuery, session: AsyncSession):
             menu.append(
                 types.InlineQueryResultVoice(
                     id=str(index),
-                    title=voice.name,
+                    title=voice.get_name(),
                     voice_url=f'{voice.url}'
                 )
             )
