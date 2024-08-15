@@ -4,6 +4,7 @@ MAINTAINER Kirill Kuznetsov <kafomin@yandex.ru>
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+ENV DEBUG=False
 
 RUN pip install --upgrade pip
 COPY src/requirements.txt /temp/requirements.txt

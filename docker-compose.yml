@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+
+  utkabot:
+    container_name: utkabot
+    build:
+      context: .
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./src:/opt/utkabot
+    command: >
+      sh -c "python app.py"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - BOT_NAME=${BOT_NAME}
+      - BOT_SHORT_DESCRIPTION=${BOT_SHORT_DESCRIPTION}
+      - BOT_DESCRIPTION=${BOT_DESCRIPTION}
+      - ADMIN_IDS=${ADMIN_IDS}
+      - SKIP_UPDATES=${SKIP_UPDATES}
+      - SUPABASE_API_KEY=${SUPABASE_API_KEY}voicy
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - SUPABASE_KEY_ACCESS=${SUPABASE_KEY_ACCESS}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_PROJECT_ID=${SUPABASE_PROJECT_ID}
+      - SUPABASE_REGION=${SUPABASE_REGION}
+      - SUPABASE_BUCKET=${SUPABASE_BUCKET}
