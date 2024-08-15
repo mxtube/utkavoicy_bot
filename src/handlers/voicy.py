@@ -43,4 +43,4 @@ async def chosen_inline_result_handler(chosen_result: types.ChosenInlineResult, 
     av = AnalyticsVoicy(user_id=user.id, voicy_id=result_id)
     session.add(av)
     await session.commit()
-    logger.info(f'Add voicy analytics {result_id}')
+    logger.info(f'Add voicy analytics {user_id} {result_id}')
