@@ -1,1 +1,1 @@
-from .about_bot import setting_bot_menu
+from .about_bot import BotSettings

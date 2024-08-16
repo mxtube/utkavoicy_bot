@@ -2,7 +2,7 @@ import asyncio
 from loguru import logger
 
 from loader import dp, bot
-from utils import setting_bot_menu
+from utils import BotSettings
 from database import initialize_database, initialize_voices
 from utils.s3_client import S3Client
 
@@ -14,7 +14,7 @@ async def main():
     voices = await S3Client().get_files()
     await initialize_voices(voices)
     await bot.delete_webhook(drop_pending_updates=True)
-    await setting_bot_menu()
+    await BotSettings(current_settings=await bot.get_me()).initial_settings()
     logger.info('Bot run')
     await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
     logger.info('Bot stopped')
