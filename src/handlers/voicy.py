@@ -27,8 +27,9 @@ async def voicy_message(inline_query: types.InlineQuery, session: AsyncSession):
                 )
             )
         await inline_query.answer(menu, cache_time=1, is_personal=True)
-    menu = [types.InlineQueryResultVoice(id='1', title='Use /start in bot', voice_url='https://t.me/')]
-    await inline_query.answer(results=menu, cache_time=1, is_personal=True)
+    else:
+        menu = [types.InlineQueryResultVoice(id='1', title='Use /start in bot', voice_url='https://t.me/')]
+        await inline_query.answer(results=menu, cache_time=1, is_personal=True)
 
 
 @voicy_router.chosen_inline_result()
