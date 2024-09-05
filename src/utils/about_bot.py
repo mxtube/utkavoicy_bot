@@ -20,7 +20,8 @@ class BotSettings:
         logger.info('Delete all commands from bot menu')
         private = [
             types.BotCommand(command='start', description='Запустить/Перезапустить бота'),
-            types.BotCommand(command='help', description='Как использовать бота')
+            types.BotCommand(command='help', description='Как использовать бота'),
+            types.BotCommand(command='bug', description='Как сообщить об ошибке (Только в приватном чате)')
         ]
         await bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
         logger.info(f'Finish configuring bot menu. Count command ({private.__len__()})')
