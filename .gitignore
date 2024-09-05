@@ -10,3 +10,4 @@ __pycache__/
 
 # Other
 .DS_Store
+docker_compose_volumes/

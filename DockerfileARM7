@@ -1,4 +1,6 @@
-FROM python:3.12.5-alpine3.20
+FROM arm32v7/python:3.12.5-alpine3.20
+
+RUN apk add --no-cache build-base rust cargo libffi-dev
 
 COPY src/requirements.txt /temp/requirements.txt
 

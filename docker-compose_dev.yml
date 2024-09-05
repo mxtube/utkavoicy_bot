@@ -4,9 +4,14 @@ services:
 
   utkabot:
     container_name: utkabot
-    image: kafomin/utkabot:1.0.0
+    build:
+      context: .
+    volumes:
+      - ./src:/opt/utkabot
+    command: >
+      sh -c "python app.py"
     environment:
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=postgres
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
@@ -24,3 +29,15 @@ services:
       - SUPABASE_PROJECT_ID=${SUPABASE_PROJECT_ID}
       - SUPABASE_REGION=${SUPABASE_REGION}
       - SUPABASE_BUCKET=${SUPABASE_BUCKET}
+
+  postgres:
+    image: postgres:16-alpine3.20
+    container_name: pg_database
+    volumes:
+      - ./docker_compose_volumes/pg_data/:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5432:5432"
