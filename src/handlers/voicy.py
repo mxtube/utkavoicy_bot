@@ -14,6 +14,7 @@ voicy_router = Router(name='Voicy router')
 async def voicy_message(inline_query: types.InlineQuery, session: AsyncSession):
     logger.info(f"Inline query voice from user {inline_query.from_user.username}")
     user = await User.is_user_exists(session, inline_query.from_user.id)
+    cache_time_query_result = 10800
     if user:
         query = await session.execute(select(Voicy).where(Voicy.deleted_at.is_(None)))
         voices = query.scalars().all()
@@ -26,10 +27,10 @@ async def voicy_message(inline_query: types.InlineQuery, session: AsyncSession):
                     voice_url=f'{voice.url}'
                 )
             )
-        await inline_query.answer(menu, cache_time=1, is_personal=True)
+        await inline_query.answer(menu, cache_time=cache_time_query_result, is_personal=True)
     else:
-        menu = [types.InlineQueryResultVoice(id='1', title='Use /start in bot', voice_url='https://t.me/')]
-        await inline_query.answer(results=menu, cache_time=1, is_personal=True)
+        menu = [types.InlineQueryResultVoice(id='1', title='Use /start in private chat', voice_url='https://t.me/')]
+        await inline_query.answer(results=menu, cache_time=cache_time_query_result, is_personal=True)
 
 
 @voicy_router.chosen_inline_result()
