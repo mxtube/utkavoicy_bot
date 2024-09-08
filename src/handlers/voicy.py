@@ -14,7 +14,7 @@ voicy_router = Router(name='Voicy router')
 async def voicy_message(inline_query: types.InlineQuery, session: AsyncSession):
     logger.info(f"Inline query voice from user {inline_query.from_user.username}")
     user = await User.is_user_exists(session, inline_query.from_user.id)
-    cache_time_query_result = 10800
+    cache_time_query_result = 60
     if user:
         query = await session.execute(select(Voicy).where(Voicy.deleted_at.is_(None)))
         voices = query.scalars().all()
