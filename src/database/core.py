@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 
 from config import settings
 from models import Base, Voicy
-import models
+import models # noqa F401
 
 
 sa_async_engine = create_async_engine(
