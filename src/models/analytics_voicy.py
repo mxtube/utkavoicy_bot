@@ -1,8 +1,7 @@
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from .sa import intpk, usage_at, Base
-from .user import User
 
 
 class AnalyticsVoicy(Base):
@@ -15,4 +14,3 @@ class AnalyticsVoicy(Base):
     usage_at: Mapped[usage_at]
 
     repr_cols_num = 4
-
