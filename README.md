@@ -6,6 +6,7 @@
 
 ```
 DEBUG = False
+SKIP_UPDATES = False
 
 DB_HOST = 'ip'
 DB_PORT = 5432
@@ -21,22 +22,11 @@ BOT_DESCRIPTION = ''
 ADMIN_IDS = '["first admin id", "second admin id"]' 
 SKIP_UPDATES = False
 
-OPENDRIVE_USER = ''
-OPENDRIVE_PASSWORD = ''
-OPENDRIVE_PROJECT_DIRECTORY = ''
+SUPABASE_API_KEY =
+SUPABASE_KEY =
+SUPABASE_KEY_ACCESS =
+SUPABASE_URL =
+SUPABASE_PROJECT_ID =
+SUPABASE_REGION =
+SUPABASE_BUCKET =
 ```
-
-### @BotFather settings
-В ```@BotFather``` настройте placeholder для ```Inline Mode```:
-
-```Edit Bot``` > ```Edit inline placeholder``` 
-
-и включите ```Inline Mode```:
-
-```Bot Settings``` > ```Inline Mode``` > ```Turn inline mode on```
-
-### OpenDrive
-В качестве хостинга файлов используется сервис [OpenDrive](https://www.opendrive.com/personal) с открытым API 1.1.7, по документации нет метода получающего список директорий и файлов, в связи с этим необходимо получить ID директории проекта и установить в виртуальное окружение. Для работы с сервисом используется логин и пароль от учетной записи.
-
-### Run
-Для запуска воспользуйтесь командой ```python app.py```
